@@ -1,13 +1,9 @@
 FROM denoland/deno:latest
 
-# Create working directory
 WORKDIR /app
-
-# Copy source
 COPY . .
 
-# Compile the main app
-RUN deno cache main.ts
+RUN deno cache debug.ts
 
-# Run the app
-CMD ["deno", "run", "-A", "main.ts"]
+EXPOSE 8080
+CMD ["deno", "run", "--allow-net", "--allow-read", "--allow-env", "debug.ts"]
